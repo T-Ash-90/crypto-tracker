@@ -37,7 +37,7 @@ A lightweight Python tool that fetches and displays real-time cryptocurrency pri
 2. Run the Python script with the following command:
 
    ```bash
-   python crypto_tracker.py
+   python3 crypto_tracker.py
 
 3. The script will fetch the latest cryptocurrency prices and display them right in your terminal.
 
