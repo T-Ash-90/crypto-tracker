@@ -6,13 +6,13 @@ def fetch_top_50_prices():
 
     # Parameters to fetch the top 50 coins, sorted by market cap (descending)
     params = {
-        "vs_currency": "eur",  # You can change this to USD, GBP, etc.
-        "order": "market_cap_desc",  # Sort by market cap (descending)
-        "per_page": 50,  # Limit to the top 50 coins
-        "page": 1,  # The first page of results
+        "vs_currency": "eur",
+        "order": "market_cap_desc",
+        "per_page": 50,
+        "page": 1,
     }
 
-    # Send the request to the CoinGecko API
+    # Send a GET request to the CoinGecko API
     response = requests.get(url, params=params)
 
     # Check if the response was successful (status code 200)
