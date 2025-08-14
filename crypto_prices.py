@@ -12,20 +12,30 @@ def fetch_top_50_prices():
         "page": 1,
     }
 
-    # Send a GET request to the CoinGecko API
-    response = requests.get(url, params=params)
+    try:
+        # Send a GET request to the CoinGecko API with a timeout of 10 seconds
+        response = requests.get(url, params=params, timeout=10)
 
-    # Check if the response was successful (status code 200)
-    if response.status_code == 200:
-        data = response.json()
+        # Check if the response was successful (status code 200)
+        if response.status_code == 200:
+            try:
+                # Try to parse the response as JSON
+                data = response.json()
 
-        # Print the name and price of each cryptocurrency
-        for coin in data:
-            name = coin['name']
-            price = coin['current_price']
-            print(f"{name}: €{price}")
-    else:
-        print(f"Failed to fetch data: {response.status_code}")
+                # Print the name and price of each cryptocurrency
+                for coin in data:
+                    name = coin['name']
+                    price = coin['current_price']
+                    print(f"{name}: €{price}")
+            except ValueError:
+                print("Error: Failed to parse the response as JSON.")
+        else:
+            print(f"Failed to fetch data: {response.status_code}")
+
+    except requests.exceptions.Timeout:
+        print("Error: The request timed out. Please try again later.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error: A network error occurred - {e}")
 
 # Call the function to fetch and display the prices
 fetch_top_50_prices()
